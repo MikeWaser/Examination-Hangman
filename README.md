@@ -1,4 +1,3 @@
 # Examination-Hangman
 
-Array med ord
-Timer
+Array med ord, timer upper vänster
