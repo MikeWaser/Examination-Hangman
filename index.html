@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Hangman Game</title>
-</head>
-<body>
-    <h2>Hangerman</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Hangman</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container header">
+        <h2>Hangman</h2>
+      </div>
+      <div class="container timer"></div>
+      <div class="container hangman">
+        <img src="/images/hangman.svg" alt="Hanging man" />
+      </div>
+      <div class="container wrongGuess">
+        <span id="wrongLetter"></span>
+      </div>
+      <div class="container answer">
+        <span id="currentWord"></span>
+      </div>
+      <div class="container userInput"></div>
+      <div class="container new">
+        <div class="result"></div>
+        <button id="newGame">New Game</button>
+      </div>
+      <div class="container start">
+        <button id="startBtn">Start</button>
+      </div>
+    </div>
     <script src="script.js" defer></script>
-</body>
+  </body>
 </html>
