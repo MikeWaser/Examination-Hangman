@@ -52,14 +52,14 @@ img {
   grid-row: 3 / 10;
 }
 
-.answer {
+.randomWord {
   grid-column: 5 / 9;
-  grid-row: 13 / 14;
+  grid-row: 11 / 12;
 }
 
 .userInput {
-  grid-column: 4 / 10;
-  grid-row: 11 / 12;
+  grid-column: 6 / 8;
+  grid-row: 13 / 14;
 }
 
 .start {

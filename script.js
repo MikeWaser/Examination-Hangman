@@ -1,1 +1,1 @@
-const wordBank = []
+const wordBank = [""]
