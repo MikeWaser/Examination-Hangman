@@ -4,7 +4,7 @@
 
 
 1. Layout HTML, CSS (Först eller sist?) [ok]
-3. Array med ord [ok]
+3. Array med ord (wordBank)[ok]
 4. Timer 5 min
 5. Start knapp
 6. Funktion (chooseWord) slumpar ett ord från arrayn och gör understreck istället.
