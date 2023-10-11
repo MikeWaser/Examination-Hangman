@@ -8,7 +8,7 @@
 4. Timer 5 min [ok]
 5. Start knapp [ok ish]
 6. Funktion (chooseWord) slumpar ett ord från arrayn och gör understreck istället. [ok]
-7. Input box för att gissa bokstav. [ok]
+7. Input box för att gissa bokstav. [ok ish]
 8. Funktion (checkLetter) tar 1 bokstav och kollar om bokstaven stämmer med ordet som funktionen       chooseWord valde om bostaven stämmde blir det return i "container randomWord" och om den inte       stämmer kör funktionen return till container wrongGuess, lägger till en del av hangman och ta       bort bokstaven som alternativ.
 9. Funktion (drawHangman) lägger till delar av hangman bilden när man gissar fel bokstav.
 10. Länka ihop funktionerna
