@@ -5,7 +5,7 @@
 
 1. Layout HTML, CSS (Först eller sist?) [ok]
 3. Array med ord (wordBank)[ok]
-4. Timer 5 min
+4. Timer 5 min [ok]
 5. Start knapp
 6. Funktion (chooseWord) slumpar ett ord från arrayn och gör understreck istället.
 7. Funktion (checkLetter) tar 1 bokstav och kollar om bokstaven stämmer med ordet som funktionen chooseWord valde.
