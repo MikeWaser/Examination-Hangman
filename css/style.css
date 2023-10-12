@@ -10,6 +10,10 @@ body {
   height: 100vh;
 }
 
+p {
+  font-size: 2rem;
+}
+
 .wrapper {
   width: 100vw;
   height: 100vh;
@@ -19,7 +23,7 @@ body {
 }
 
 .container {
-  /*background: #c5ffff;*/
+  background: #c5ffff;
   display: flex;
 }
 
@@ -31,6 +35,9 @@ img {
 .timer {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header {
@@ -40,6 +47,23 @@ img {
   justify-content: center;
   align-items: center;
   font-size: 2rem;
+}
+
+.startbutton {
+  grid-column: 12 / 13;
+  grid-row: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#StartTimerBtn {
+  text-decoration: none;
+  border: none;
+  background-color: #c5ffff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .hangman {

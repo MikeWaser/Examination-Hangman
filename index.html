@@ -11,10 +11,13 @@
       <div class="container header">
         <h2>Hangman</h2>
       </div>
-      <div class="container timer"></div>
-      <div class="container hangman">
-        <img src="/images/hangman.svg" alt="Hanging man" />
+      <div class="container timer">
+        <p id="countdown">5:00</p>
       </div>
+      <div class="container hangman">
+        <img src="./images/hangman.svg" alt="Hanging man" />
+      </div>
+      <div class="container startbutton"><button id="StartTimerBtn" onclick="startTimer()">START</button></div>
       <div class="container wrongGuess">
         <span id="wrongLetter"></span>
       </div>
