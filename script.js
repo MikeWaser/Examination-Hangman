@@ -1,18 +1,23 @@
-// Array med ord som ska slumpas in i continer answer
-const wordBank = [
-  "javascript",
-  "website",
-  "game",
-  "keyboard",
-  "hangman",
-  "coding",
-];
+// getElementByClass
 
-const randomAnswer = wordBank[Math.floor(Math.random() * wordBank.length)]
+const words = ["Volvo", "Saab", "Ford", "Fiat", "Ferrari", "Porsche"];
+const randomWords = words[Math.floor(Math.random() * words.length)];
+const splitWords = randomWords.split("");
+const consoleSplitWords = randomWords.split("");
+const consoleJoinSplitWords = consoleSplitWords.join("");
+console.log(consoleSplitWords);
+console.log(consoleJoinSplitWords);
 
-let currentWord = []
-
-for (let i = 0 ; i < randomAnswer.length; i++){
-currentWord.push("_")
+for (let i = 0; i < splitWords.length; i++) {
+  splitWords[i] = "_";
 }
-document.getElementById("currentWord2").innerHTML = currentWord.join ("")
+
+const joinSplitWords = splitWords.join(" ");
+
+// const howMany = splitWords.length("");
+// console.log(howMany);
+// splitWords.splice(0, 1, "_");
+
+const seeWords = document.querySelector("#currentWord");
+
+seeWords.innerText = joinSplitWords;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
-    <title>Hangman</title>
+    <title>Hang The Man</title>
   </head>
   <body>
     <div class="wrapper">
@@ -18,10 +18,12 @@
       <div class="container wrongGuess">
         <span id="wrongLetter"></span>
       </div>
-      <div class="container answer">
-        <p><span id="currentWord2"></span></p>
+      <div class="container randomWord">
+        <span id="currentWord"></span>
       </div>
-      <div class="container userInput"></div>
+      <div class="container userInput">
+        <input type ="text" placeholder = "Guess Letter">
+      </div>
       <div class="container new">
         <div class="result"></div>
         <button id="newGame">New Game</button>
@@ -32,4 +34,4 @@
     </div>
     <script src="script.js" defer></script>
   </body>
-</html>
+</html
