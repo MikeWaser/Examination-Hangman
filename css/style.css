@@ -45,6 +45,7 @@ img {
 .hangman {
   grid-column: 2 / 7;
   grid-row: 3 / 10;
+  /*display: none;*/
 }
 
 .wrongGuess {
