@@ -1,8 +1,34 @@
 # Examination-Hangman
 
 
+Krav på funktionalitet
+
+Du ska bygga det klassiska spelet hänga gubbe.
+Det ska vara gjort med HTML/CSS/Javascript
+Användaren ska kunna mata in med tangentbordet bokstäver
+Användaren ska kunna se vilka bokstäver den gissar rätt på och var i ordet de hamnar
+Vid varje fel ska en del av gubben visas
+Ifall användaren gissar på rätt ord så ska en ”Du vann”-skärm visas med en fråga om man vill spela igen,
+Ifall användaren inte hinner gissa rätt ska en ”Du förlorade”-skärm visas med det rätta ordet och en fråga om man vill spela igen.
+Du ska enbart kunna gissa på en bokstav i taget.
+Ordet får inte vara hårdkodat i Javascript-filen när den ska jämföras. Förslagsvis kan ordet slumpas från en array med ord.
 
 
+Betygskriterier för godkänt 
+
+Alla krav på funktionalitet är uppfyllda och följs.
+Att SVG:en som bifogas i HTML:en används
+Spelet fungerar med inga fel i konsolen i developer tools.
+Vettiga namn på variabler och funktioner på engelska.
+
+
+Inlämning
+
+Via classroom
+Länka till Git repository *deadline tom 17/ 10
+
+
+PLAN
 1. Layout HTML, CSS (Först eller sist?) [ok]
 3. Array med ord (wordBank) [ok]
 4. Timer 5 min [ok]
