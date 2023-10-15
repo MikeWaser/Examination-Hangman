@@ -91,27 +91,7 @@ userInputField.addEventListener("input", function () {
   const userInput = userInputField.value.toLowerCase();
 
   // Kontrollera att input endast innehåller bokstäver, inte siffror/specialtecken
-  // if (userInput.match(/^[a-z]+$/i)) {
-  //   if (randomWord.toLowerCase().includes(userInput)) {
-  //     if (!correctGuesses.includes(userInput)) {
-  //       correctGuesses.push(userInput);
-  //       updateCurrentWordDisplay();
-  //     }
-  //   } else {
-  //     if (!wrongGuesses.includes(userInput)) {
-  //       wrongGuesses.push(userInput);
-  //       updateWrongLetterDisplay();
-  //       if (wrongGuesses.length >= 6) {
-  //         // Visa resultatet för förlust om spealren har gjort för många felaktiga gissningar
-  //         handleGameResult(false);
-  //       }
-  //     }
-  //   }
-  //   userInputField.value = "";
-  // } else {
-  //   console.log("Felaktig inmatning. Ange endast bokstäver.");
-  //   userInputField.value = "";
-  // }
+  
 
   if (!userInput.match(/^[a-z]+$/i)) {
     console.log("Felaktig inmatning. Ange endast bokstäver.");
