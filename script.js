@@ -23,32 +23,32 @@ const words = [
 ];
 
 // Välj ett slumpmässigt ord från listan
-const randomTerm = words[Math.floor(Math.random() * words.length)];
+const randomWord = words[Math.floor(Math.random() * words.length)];
 
 // Splitta det slumpmässiga ordet till en array av bokstäver
-const splitTerm = randomTerm.split("");
+const splitWord = randomWord.split("");
 
 // Skapa en kopia av det slumpmässiga ordet för konsolen
-const consoleSplitTerm = randomTerm.split("");
+const consoleSplitWord = randomWord.split("");
 
 // Slå ihop det kopiade ordet till en sträng för att visa i konsolen
-const consoleJoinSplitTerm = consoleSplitTerm.join("");
+const consoleJoinSplitWord = consoleSplitWord.join("");
 
 // Visa den splittrade versionen av det slumpmässiga ordet i konsolen
-console.log(consoleSplitTerm);
+console.log(consoleSplitWord);
 
 // Visa den joinade versionen av det splittrade ordet i konsolen
-console.log(consoleJoinSplitTerm);
+console.log(consoleJoinSplitWord);
 
 // Skapa en array med underscores (_), en för varje bokstav i det slumpmässiga ordet
-for (let i = 0; i < splitTerm.length; i++) {
-  splitTerm[i] = "_";
+for (let i = 0; i < splitWord.length; i++) {
+  splitWord[i] = "_";
 }
 
 // Slå ihop arrayen med underscores till en sträng med mellanslag och visa den på webbsidan
-const joinSplitTerm = splitTerm.join(" ");
+const joinSplitWord = splitWord.join(" ");
 const seeWords = document.querySelector("#currentWord");
-seeWords.innerText = joinSplitTerm;
+seeWords.innerText = joinSplitWord;
 
 // Timer-kod
 const correctGuesses = [];  // Array för korrekta gissningar
@@ -102,7 +102,7 @@ userInputField.addEventListener("input", function () {
   // Kontrollera att input endast innehåller bokstäver, inte siffror eller specialtecken
   if (userInput.match(/^[a-z]+$/i)) {
     if (userInput.length === 1) {
-      if (randomTerm.toLowerCase().includes(userInput)) {
+      if (randomWord.toLowerCase().includes(userInput)) {
         if (!correctGuesses.includes(userInput)) {
           correctGuesses.push(userInput);
           updateCurrentWordDisplay();
@@ -129,14 +129,14 @@ userInputField.addEventListener("input", function () {
 
 // Funktion för att uppdatera visningen av det aktuella ordet
 function updateCurrentWordDisplay() {
-  const displayWord = randomTerm
+  const displayWord = randomWord
     .split("")
     .map((char) => (correctGuesses.includes(char.toLowerCase()) ? char : "_"))
     .join(" ");
   currentWordElement.textContent = displayWord;
 
   // Kolla om användaren har gissat hela ordet korrekt
-  if (displayWord.toLowerCase() === randomTerm.toLowerCase()) {
+  if (displayWord.toLowerCase() === randomWord.toLowerCase()) {
     // Här kan du lägga till kod för att hantera när användaren har gissat hela ordet korrekt.
   }
 }
@@ -153,17 +153,17 @@ function showHangmanPart(partNumber) {
 }
 
 // Funktion för att visa resultatpopupen
-function handleLossResult(isWinner) {
+function handleLossResult(gameResult) {
   const resultPopup = document.getElementById("resultPopup");
   const resultMessage = document.getElementById("resultMessage");
   const newGameButton = document.getElementById("newGame");
 
   resultPopup.style.display = "block";
 
-  if (isWinner) {
+  if (gameResult) {
     resultMessage.textContent = "Du vann!";
   } else {
-    resultMessage.innerHTML = "Du förlorade!<br>Rätt ord var: " + randomTerm;
+    resultMessage.innerHTML = "Du förlorade!<br>Rätt ord var: " + randomWord;
   }
 
   newGameButton.style.display = "block";
