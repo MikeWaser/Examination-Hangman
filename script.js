@@ -1,5 +1,26 @@
-const terms = ["JavaScript", "HTML", "CSS", "React", "Python", "Node.js", "API", "Git", "SQL", "Database", "Variable", "Function", "Algorithm", "IDE", "DOM", "Boolean", "Callback", "Debugging", "Framework", "Syntax"];
-const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+const words = [
+  "JavaScript",
+  "HTML",
+  "CSS",
+  "React",
+  "Python",
+  "Node.js",
+  "API",
+  "Git",
+  "SQL",
+  "Database",
+  "Variable",
+  "Function",
+  "Algorithm",
+  "IDE",
+  "DOM",
+  "Boolean",
+  "Callback",
+  "Debugging",
+  "Framework",
+  "Syntax",
+];
+const randomTerm = words[Math.floor(Math.random() * words.length)];
 const splitTerm = randomTerm.split("");
 const consoleSplitTerm = randomTerm.split("");
 const consoleJoinSplitTerm = consoleSplitTerm.join("");
