@@ -1,4 +1,4 @@
-const words = [
+const terms = [
   "JavaScript",
   "HTML",
   "CSS",
@@ -20,7 +20,7 @@ const words = [
   "Framework",
   "Syntax",
 ];
-const randomTerm = words[Math.floor(Math.random() * words.length)];
+const randomTerm = terms[Math.floor(Math.random() * terms.length)];
 const splitTerm = randomTerm.split("");
 const consoleSplitTerm = randomTerm.split("");
 const consoleJoinSplitTerm = consoleSplitTerm.join("");
@@ -45,6 +45,39 @@ const wrongGuesses = [];
 const userInputField = document.querySelector(".userInput input");
 const currentWordElement = document.getElementById("currentWord");
 const wrongLetterElement = document.getElementById("wrongLetter");
+
+let time = 5 * 60; // 5 minutes
+
+const knapp = document.getElementById("StartTimerBtn");
+const countdownEl = document.getElementById("countdown");
+
+let CountdownInterval;
+
+function startTimer() {
+  CountdownInterval = setInterval(updateCountdown, 10);
+
+  function updateCountdown() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    knapp.disabled = true;
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    countdownEl.innerHTML = `${minutes}:${seconds}`;
+    time--;
+
+    // Kontrollera om tiden har gått ut
+    checkTimeOut();
+  }
+}
+
+function checkTimeOut() {
+  if (time === -1) {
+    clearInterval(CountdownInterval);
+    // Anropa funktionen för att visa förlustresultat om tiden har gått ut
+    handleLossResult(false);
+  }
+}
 
 userInputField.addEventListener("input", function () {
   const userInput = userInputField.value.toLowerCase();
@@ -106,27 +139,21 @@ function handleLossResult(isWinner) {
   const resultMessage = document.getElementById("resultMessage");
   const newGameButton = document.getElementById("newGame");
 
-  // Visa resultatpopupen
   resultPopup.style.display = "block";
 
-  // Uppdatera resultatmeddelandet
   if (isWinner) {
     resultMessage.textContent = "Du vann!";
   } else {
     resultMessage.innerHTML = "Du förlorade!<br>Rätt ord var: " + randomTerm;
   }
 
-  // Visa knappen för att starta ett nytt spel
   newGameButton.style.display = "block";
 }
 
-// Lägg till en händelselyssnare för att starta ett nytt spel när knappen klickas
 const newGameButton = document.getElementById("newGame");
 newGameButton.addEventListener("click", function () {
-  // Dölj resultatpopupen
   const resultPopup = document.getElementById("resultPopup");
   resultPopup.style.display = "none";
-
-  // Återställ spelet, t.ex., genom att ladda om sidan
   location.reload();
 });
+// Lägg till en händelselyssnare för att start
