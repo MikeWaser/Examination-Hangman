@@ -1,4 +1,4 @@
-// En array med ord som kan användas som målord i hangman-spelet
+// En array med ord
 const words = [
   "JavaScript",
   "HTML",
@@ -22,23 +22,11 @@ const words = [
   "Syntax",
 ];
 
-// Välj ett slumpmässigt ord från listan
+// Välj ett slumpmässigt ord från words listan
 const randomWord = words[Math.floor(Math.random() * words.length)];
 
 // Splitta det slumpmässiga ordet till en array av bokstäver
 const splitWord = randomWord.split("");
-
-// Skapa en kopia av det slumpmässiga ordet för konsolen
-const consoleSplitWord = randomWord.split("");
-
-// Slå ihop det kopiade ordet till en sträng för att visa i konsolen
-const consoleJoinSplitWord = consoleSplitWord.join("");
-
-// Visa den splittrade versionen av det slumpmässiga ordet i konsolen
-console.log(consoleSplitWord);
-
-// Visa den joinade versionen av det splittrade ordet i konsolen
-console.log(consoleJoinSplitWord);
 
 // Skapa en array med underscores (_), en för varje bokstav i det slumpmässiga ordet
 for (let i = 0; i < splitWord.length; i++) {
@@ -50,7 +38,7 @@ const joinSplitWord = splitWord.join(" ");
 const seeWords = document.querySelector("#currentWord");
 seeWords.innerText = joinSplitWord;
 
-// Timer-kod
+
 const correctGuesses = [];  // Array för korrekta gissningar
 const wrongGuesses = [];    // Array för felaktiga gissningar
 
@@ -59,6 +47,8 @@ const userInputField = document.querySelector(".userInput input");
 const currentWordElement = document.getElementById("currentWord");
 const wrongLetterElement = document.getElementById("wrongLetter");
 
+
+// Timer
 let time = 5 * 60; // 5 minuter, omvandlat till sekunder
 
 const knapp = document.getElementById("StartTimerBtn");
@@ -95,11 +85,11 @@ function checkTimeOut() {
   }
 }
 
-// Lyssna på användarinput
+// Lyssna på input
 userInputField.addEventListener("input", function () {
   const userInput = userInputField.value.toLowerCase();
 
-  // Kontrollera att input endast innehåller bokstäver, inte siffror eller specialtecken
+  // Kontrollera att input endast innehåller bokstäver, inte siffror/specialtecken
   if (userInput.match(/^[a-z]+$/i)) {
     if (userInput.length === 1) {
       if (randomWord.toLowerCase().includes(userInput)) {
@@ -112,7 +102,7 @@ userInputField.addEventListener("input", function () {
           wrongGuesses.push(userInput);
           updateWrongLetterDisplay();
           if (wrongGuesses.length >= 6) {
-            // Visa resultatet för förlust om användaren har gjort för många felaktiga gissningar
+            // Visa resultatet för förlust om spealren har gjort för många felaktiga gissningar
             handleLossResult(false);
           }
         }
@@ -120,14 +110,12 @@ userInputField.addEventListener("input", function () {
       userInputField.value = "";
     }
   } else {
-    // Felaktig inmatning (siffror eller specialtecken)
-    // Här kan du lägga till kod för att hantera felaktig inmatning
     console.log("Felaktig inmatning. Ange endast bokstäver.");
     userInputField.value = "";
   }
 });
 
-// Funktion för att uppdatera visningen av det aktuella ordet
+// Funktion för att uppdatera visningen av ordet
 function updateCurrentWordDisplay() {
   const displayWord = randomWord
     .split("")
@@ -137,7 +125,7 @@ function updateCurrentWordDisplay() {
 
   // Kolla om användaren har gissat hela ordet korrekt
   if (displayWord.toLowerCase() === randomWord.toLowerCase()) {
-    // Här kan du lägga till kod för att hantera när användaren har gissat hela ordet korrekt.
+    // Kod när spelaren har gissat hela ordet korrekt.
   }
 }
 
@@ -148,8 +136,7 @@ function updateWrongLetterDisplay() {
 
 // Funktion för att visa en del av Hangman
 function showHangmanPart(partNumber) {
-  // Hämta delen från SVG eller använd annan metod för att visa Hangman
-  // Implementera din egen logik här
+  // Hämta delen från SVG 
 }
 
 // Funktion för att visa resultatpopupen
@@ -169,7 +156,6 @@ function handleLossResult(gameResult) {
   newGameButton.style.display = "block";
 }
 
-// Lyssna på klick på knappen för att starta en ny omgång
 const newGameButton = document.getElementById("newGame");
 newGameButton.addEventListener("click", function () {
   const resultPopup = document.getElementById("resultPopup");
