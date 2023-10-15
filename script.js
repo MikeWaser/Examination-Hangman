@@ -110,7 +110,11 @@ function handleLossResult(isWinner) {
   resultPopup.style.display = "block";
 
   // Uppdatera resultatmeddelandet
-  resultMessage.textContent = isWinner ? "Du vann!" : "Du förlorade!";
+  if (isWinner) {
+    resultMessage.textContent = "Du vann!";
+  } else {
+    resultMessage.innerHTML = "Du förlorade!<br>Rätt ord var: " + randomTerm;
+  }
 
   // Visa knappen för att starta ett nytt spel
   newGameButton.style.display = "block";
