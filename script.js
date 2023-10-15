@@ -24,6 +24,7 @@ const words = [
 
 // Välj ett slumpmässigt ord från words listan
 const randomWord = words[Math.floor(Math.random() * words.length)];
+console.log(randomWord);
 
 // Splitta det slumpmässiga ordet till en array av bokstäver
 const splitWord = randomWord.split("");
@@ -58,7 +59,7 @@ let CountdownInterval;
 
 // Funktion för att starta timer
 function startTimer() {
-  CountdownInterval = setInterval(updateCountdown, 10);
+  CountdownInterval = setInterval(updateCountdown, 1000);
 
   function updateCountdown() {
     const minutes = Math.floor(time / 60);
@@ -81,7 +82,7 @@ function checkTimeOut() {
   if (time === -1) {
     clearInterval(CountdownInterval);
     // Visa resultatet för förlust om tiden har gått ut
-    handleLossResult(false);
+    handleGameResult(false);
   }
 }
 
@@ -90,29 +91,50 @@ userInputField.addEventListener("input", function () {
   const userInput = userInputField.value.toLowerCase();
 
   // Kontrollera att input endast innehåller bokstäver, inte siffror/specialtecken
-  if (userInput.match(/^[a-z]+$/i)) {
-    if (userInput.length === 1) {
-      if (randomWord.toLowerCase().includes(userInput)) {
-        if (!correctGuesses.includes(userInput)) {
-          correctGuesses.push(userInput);
-          updateCurrentWordDisplay();
-        }
-      } else {
-        if (!wrongGuesses.includes(userInput)) {
-          wrongGuesses.push(userInput);
-          updateWrongLetterDisplay();
-          if (wrongGuesses.length >= 6) {
-            // Visa resultatet för förlust om spealren har gjort för många felaktiga gissningar
-            handleLossResult(false);
-          }
-        }
-      }
-      userInputField.value = "";
-    }
-  } else {
+  // if (userInput.match(/^[a-z]+$/i)) {
+  //   if (randomWord.toLowerCase().includes(userInput)) {
+  //     if (!correctGuesses.includes(userInput)) {
+  //       correctGuesses.push(userInput);
+  //       updateCurrentWordDisplay();
+  //     }
+  //   } else {
+  //     if (!wrongGuesses.includes(userInput)) {
+  //       wrongGuesses.push(userInput);
+  //       updateWrongLetterDisplay();
+  //       if (wrongGuesses.length >= 6) {
+  //         // Visa resultatet för förlust om spealren har gjort för många felaktiga gissningar
+  //         handleGameResult(false);
+  //       }
+  //     }
+  //   }
+  //   userInputField.value = "";
+  // } else {
+  //   console.log("Felaktig inmatning. Ange endast bokstäver.");
+  //   userInputField.value = "";
+  // }
+
+  if (!userInput.match(/^[a-z]+$/i)) {
     console.log("Felaktig inmatning. Ange endast bokstäver.");
     userInputField.value = "";
+    return;
   }
+
+  if (randomWord.toLowerCase().includes(userInput) && !correctGuesses.includes(userInput)) {
+    correctGuesses.push(userInput);
+    updateCurrentWordDisplay();
+    userInputField.value = "";
+    return;
+  }
+
+  if (!wrongGuesses.includes(userInput)) {
+    wrongGuesses.push(userInput);
+    updateWrongLetterDisplay();
+    if (wrongGuesses.length >= 6) {
+      // Visa resultatet för förlust om spealren har gjort för många felaktiga gissningar
+      handleGameResult(false);
+    }
+  }
+  userInputField.value = "";
 });
 
 // Funktion för att uppdatera visningen av ordet
@@ -123,9 +145,15 @@ function updateCurrentWordDisplay() {
     .join(" ");
   currentWordElement.textContent = displayWord;
 
+  // DET HÄR ÄR ÄNDRAT
+  const guess = displayWord.split('').filter(letter => letter.trim()).join('').toLowerCase();
+  const actual = randomWord.split('').filter(letter => letter.trim()).join('').toLowerCase();
+
   // Kolla om användaren har gissat hela ordet korrekt
-  if (displayWord.toLowerCase() === randomWord.toLowerCase()) {
+  if (guess === actual) {
     // Kod när spelaren har gissat hela ordet korrekt.
+    // DET HÄR ÄR ÄNDRAT
+    handleGameResult(true);
   }
 }
 
@@ -140,7 +168,13 @@ function showHangmanPart(partNumber) {
 }
 
 // Funktion för att visa resultatpopupen
-function handleLossResult(gameResult) {
+// DET HÄR ÄR ÄNDRAT
+function handleGameResult(gameResult) {
+  // DET HÄR ÄR ÄNDRAT
+  const input = document.querySelector('input');
+  if (input) {
+    input.disabled = true;
+  }
   const resultPopup = document.getElementById("resultPopup");
   const resultMessage = document.getElementById("resultMessage");
   const newGameButton = document.getElementById("newGame");

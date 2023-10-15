@@ -87,7 +87,7 @@ img {
 
 input {
   display: flex;
-  max-width: 80px;
+  width: 80px;
 }
 
 span {
