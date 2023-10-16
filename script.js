@@ -123,6 +123,12 @@ userInputField.addEventListener("input", function () {
   if (!wrongGuesses.includes(userInput)) {
     wrongGuesses.push(userInput);
     updateWrongLetterDisplay();
+
+
+    //showPath(wrongGuesses.length);
+    //if (wrongGuesses.length >= 6) handleGameResult(false);
+
+    
     if (wrongGuesses.length === 1) {
       showPath(1);
     } else if (wrongGuesses.length === 2) {
@@ -146,25 +152,36 @@ userInputField.addEventListener("input", function () {
 // Tar reda på vilken bild som ska skrivas ut beroende på hur många fel man har
 function showPath(pathNumber) {
   const selectedPath = document.getElementById(`path${pathNumber}`);
+  console.log({selectedPath});
   selectedPath.style.display = "block";
 }
 
 // Funktion för att uppdatera visningen av ordet
 function updateCurrentWordDisplay() {
+
   const displayWord = randomWord
+    // .split("") -> "javascript" -> ["j", "a", "v", "a", "s", "c", "r", "i", "p", "t"]
     .split("")
+    // .map(char) -> Itererar varje bokstav i ["j", "a", "v", "a", "s", "c", "r", "i", "p", "t"] och exekverar det som står i map((char) => // detta)
     .map((char) => (correctGuesses.includes(char.toLowerCase()) ? char : "_"))
+    // .join(" ") -> ["j", "a", "v", "a", "s", "c", "r", "i", "p", "t"] -> "j a v a s c r i p t"
     .join(" ");
   currentWordElement.textContent = displayWord;
 
+  // "st ri ng".trim() // -> "st ri ng"
+  // "     st ri ng    ".trim() // -> "st ri ng"
+
+  // const arr = [1,2,3,4]; // arr.map((number) => number.toString()) -> ["1","2","3","4"]
+
   const guess = displayWord
     .split("")
-    .filter((letter) => letter.trim())
+    .filter((letter) => letter !== " ")
     .join("")
-    .toLowerCase();
+    .toLowerCase(); // -> "HEJ" -> "hej"
+
   const actual = randomWord
     .split("")
-    .filter((letter) => letter.trim())
+    .filter((letter) => letter !== " ") // " " -> .trim() -> "" -> false
     .join("")
     .toLowerCase();
 
@@ -192,7 +209,7 @@ function handleGameResult(gameResult) {
   resultPopup.style.display = "flex";
 
   if (gameResult) {
-    resultMessage.textContent = "<b>Du vann!</b>";
+    resultMessage.innerHTML = "<b>Du vann!</b>";
     clearInterval(CountdownInterval);
   } else {
     resultMessage.innerHTML = "<b>Du förlorade!</b><br>Rätt ord var: " + randomWord;
