@@ -1,8 +1,7 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box¨;
-  /*border: 1px solid black;*/
+  box-sizing: border-box;
 }
 
 body {
@@ -23,11 +22,6 @@ body {
   display: flex;
 }
 
-img {
-  width: 100vw;
-  height: auto;
-}
-
 .timer {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
@@ -43,12 +37,40 @@ img {
   text-decoration: underline;
 }
 
+.start {
+  grid-column: 6 / 8;
+  grid-row: 6 / 8;
+  background: grey;
+  justify-content: center;
+  align-items: center;
+}
+
 .hangman {
   grid-column: 2 / 7;
   grid-row: 3 / 10;
   margin-top: 2rem;
-  /*display: none;*/
+  max-width: 400px;
 }
+
+#path1{
+  display:none;
+}
+#path2{
+  display:none;
+}
+#path3{
+  display:none;
+}
+#path4{
+  display:none;
+}
+#path5{
+  display:none;
+}
+#path6{
+  display:none;
+}
+
 
 .wrongGuess {
   grid-column: 8 / 11;
@@ -67,27 +89,8 @@ img {
   justify-content: center;
 }
 
-.start {
-  grid-column: 6 / 8;
-  grid-row: 6 / 8;
-  background: grey;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.popUp {
-  grid-column: 4 / 10;
-  grid-row: 5 / 9;
-  background: grey;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
 input {
-  display: flex;
-  width: 80px;
+  width: 85px;
 }
 
 span {
@@ -123,12 +126,20 @@ span {
 
 #resultPopup {
   display: none;
+  flex-direction: column;
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
   border: 1px solid #ccc;
   padding: 20px;
   text-align: center;
+}
+
+#newGame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
 }
