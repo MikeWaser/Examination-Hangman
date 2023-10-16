@@ -1,139 +1,211 @@
-function randomWordGenerator() {
-  const words = ["Volvo", "Saab", "Ford", "Fiat", "Ferrari", "Porsche"];
-  const randomWords = words[Math.floor(Math.random()*words.length)];
-  return randomWords;
+// Timer
+let time = 5 * 60; // 5 minuter, omvandlat till sekunder
+
+const timerButton = document.getElementById("StartTimerBtn");
+const countdownEl = document.getElementById("countdown");
+
+let CountdownInterval;
+
+// Stänger av useInput tills timern startar
+document.getElementById("inputBox").disabled = true;
+
+// Funktion för att starta timer
+function startTimer() {
+  CountdownInterval = setInterval(updateCountdown, 1000);
+  timerButton.disabled = true;
+  document.getElementById("inputBox").disabled = false;
 }
-let getWord = randomWordGenerator();
-function coveredLettersWords (okok) {
-  const splitWordsCovered = okok;
-  const splitWords = splitWordsCovered.split("");
-  for (let i = 0; i < splitWords.length; i++) {
-    splitWords[i] = "_";
+
+function updateCountdown() {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+// Lägger till en nolla innan sekunden när den är < 10
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  // Uppdatera nedräkningen i DOM
+  countdownEl.innerHTML = `${minutes}:${seconds}`;
+  time--;
+
+  // Kontrollera om tiden har gått ut
+  checkTimeOut();
+}
+
+// Funktion för att kontrollera om tiden har gått ut
+function checkTimeOut() {
+  if (time === -1) {
+    clearInterval(CountdownInterval);
+
+    // Visa resultatet för förlust om tiden har gått ut
+    handleGameResult(false);
   }
-  const joinSplitWordsCovered = splitWords.join(" ");
-  return joinSplitWordsCovered;
 }
-function revealingLettersWords (noknok) {
-  const splitWordsRevealed = (noknok);
-  const splitWords = splitWordsRevealed.split("");
-  const joinSplitWordsRevealed = splitWords.join(" ");
-  return joinSplitWordsRevealed;
+
+// En array med ord
+const words = [
+  "JavaScript",
+  "HTML",
+  "CSS",
+  "React",
+  "Python",
+  "API",
+  "Git",
+  "SQL",
+  "Database",
+  "Variable",
+  "Function",
+  "Algorithm",
+  "IDE",
+  "DOM",
+  "Boolean",
+  "Callback",
+  "Debugging",
+  "Framework",
+  "Syntax",
+];
+
+// Välj ett slumpmässigt ord från words listan
+const randomWord = words[Math.floor(Math.random() * words.length)];
+console.log(randomWord);
+
+// Splitta det slumpmässiga ordet till en array av bokstäver
+const splitWord = randomWord.split("");
+
+// Skapa en array med underscores (_), en för varje bokstav i det slumpmässiga ordet
+for (let i = 0; i < splitWord.length; i++) {
+  splitWord[i] = "_";
 }
-console.log(coveredLettersWords(getWord));
-console.log(revealingLettersWords(getWord));
 
-
-
-// splitWords.splice(0, 1, "_");
-
+// Slå ihop arrayen med underscores till en sträng med mellanslag och visa den på webbsidan
+const joinSplitWord = splitWord.join(" ");
 const seeWords = document.querySelector("#currentWord");
+seeWords.innerText = joinSplitWord;
 
-seeWords.innerText = randomWordGenerator();
+// Hämta elementen från HTML
+const userInputField = document.querySelector(".userInput input");
+const currentWordElement = document.getElementById("currentWord");
+const wrongLetterElement = document.getElementById("wrongLetter");
 
-let guessLetter = document.querySelector("#guessLetter")
-let showLetter = document.querySelector("#wrongLetter")
-guessLetter.addEventListener("input", () => { // (guessLetter elr inputValue == randomWordGenerator.includes "maybe")
-  let inputValue = guessLetter.value;
-  showLetter.innerText = inputValue;
+// Sparar spelarens gissningar
+const correctGuesses = []; // Array för korrekta gissningar
+const wrongGuesses = []; // Array för felaktiga gissningar
+
+// Lyssna på input
+userInputField.addEventListener("input", function () {
+  const userInput = userInputField.value.toLowerCase();
+
+  // Kontrollera att input endast innehåller bokstäver, inte siffror/specialtecken
+  if (!userInput.match(/^[a-z]+$/i)) {
+    console.log("Felaktig inmatning. Ange endast bokstäver.");
+    userInputField.value = "";
+    return;
+  }
+
+  // Skickar bokstaven till updateCurrentWordDisplay om den stämmer
+  if (
+    randomWord.toLowerCase().includes(userInput) &&
+    !correctGuesses.includes(userInput)
+  ) {
+    correctGuesses.push(userInput);
+    updateCurrentWordDisplay();
+    userInputField.value = "";
+    return;
+  }
+
+  // Kollar ifall bokstaven spelaren gissar finns med i correctGuesses arrayn
+  if (correctGuesses.includes(userInput) || wrongGuesses.includes(userInput)) {
+    console.log("Du har redan gissat på den här bokstaven.");
+    userInputField.value = "";
+    return;
+  }
+
+  // Uppdaterar rutan med felaktiga gissningar och lägger till SVG delarna för varje fel spelaren har
+  if (!wrongGuesses.includes(userInput)) {
+    wrongGuesses.push(userInput);
+    updateWrongLetterDisplay();
+    if (wrongGuesses.length === 1) {
+      showPath(1);
+    } else if (wrongGuesses.length === 2) {
+      showPath(2);
+    } else if (wrongGuesses.length === 3) {
+      showPath(3);
+    } else if (wrongGuesses.length === 4) {
+      showPath(4);
+    } else if (wrongGuesses.length === 5) {
+      showPath(5);
+    } else if (wrongGuesses.length >= 6) {
+      showPath(6);
+
+      // Visa resultatet för förlust om spealren har gjort för många felaktiga gissningar
+      handleGameResult(false);
+    }
+  }
+  userInputField.value = "";
 });
 
-/*
+// Tar reda på vilken bild som ska skrivas ut beroende på hur många fel man har
+function showPath(pathNumber) {
+  const selectedPath = document.getElementById(`path${pathNumber}`);
+  selectedPath.style.display = "block";
+}
 
-function () {
-  if (input == randomWordGenerator.includes) {
-    True (reveal letter)
-  } else {
-    False (add svg path)
+// Funktion för att uppdatera visningen av ordet
+function updateCurrentWordDisplay() {
+  const displayWord = randomWord
+    .split("")
+    .map((char) => (correctGuesses.includes(char.toLowerCase()) ? char : "_"))
+    .join(" ");
+  currentWordElement.textContent = displayWord;
+
+  const guess = displayWord
+    .split("")
+    .filter((letter) => letter.trim())
+    .join("")
+    .toLowerCase();
+  const actual = randomWord
+    .split("")
+    .filter((letter) => letter.trim())
+    .join("")
+    .toLowerCase();
+
+  // Om spelaren har gissat hela ordet korrekt
+  if (guess === actual) {
+    handleGameResult(true);
   }
 }
 
-*/
+// Funktion för att uppdatera visningen av felaktiga bokstäver
+function updateWrongLetterDisplay() {
+  wrongLetterElement.textContent = wrongGuesses.join(" ");
+}
 
-/* if sats som gör en .includes() koll med nån loop från "Guess Letter". TRUE: .IndexOf() för det korrekt gissade blir replaced med ordinarie bokstav (med .splice() kanske), FALSE: returnar att du gissade fel och tar ett steg i listan/arrayen för SVG filen och emot failstate. */
+// Funktion för att visa resultatpopupen
+function handleGameResult(gameResult) {
+  const input = document.querySelector("input");
+  if (input) {
+    input.disabled = true;
+  }
+  const resultPopup = document.getElementById("resultPopup");
+  const resultMessage = document.getElementById("resultMessage");
+  const newGameButton = document.getElementById("newGame");
 
+  resultPopup.style.display = "flex";
 
-// funktion som kollar words lista och guesses lista 
+  if (gameResult) {
+    resultMessage.textContent = "<b>Du vann!</b>";
+    clearInterval(CountdownInterval);
+  } else {
+    resultMessage.innerHTML = "<b>Du förlorade!</b><br>Rätt ord var: " + randomWord;
+    clearInterval(CountdownInterval);
+  }
 
+  newGameButton.style.display = "block";
+}
 
-
-/*********************************************************************************************/
-/*********************************************************************************************/
-/*********************************************************************************************/
-
-
-
-
-// function randomWordGenerator() {
-//   const words = ["Volvo", "Saab", "Ford", "Fiat", "Ferrari", "Porsche"];
-//   const randomWords = words[Math.floor(Math.random()*words.length)];
-//   // const splitWords = randomWords.split("");
-//   return randomWords;
-// }
-// let getWord = randomWordGenerator();
-// console.log(getWord);
-// console.log(typeof getWord);
-
-// function coveredLettersWords (okok) {
-//  /*  const splitWordsCovered = okok;
-//   let result = splitWordsCovered.split("");
-//   console.log(result);
-//   let result2 = result.join("_")
-//   console.log("kalle",result2)
-
-// return result2; */
-// const my_string = okok
-
-// let pattern = my_string
-// let replacement = "_";
-
-// let my_new_string = my_string.replaceAll(pattern,replacement);
-
-// console.log(my_new_string);
-
-// }
-
-// function revealingLettersWords (noknok) {
-//   const splitWordsRevealed = (noknok);
-//   // const joinSplitWordsRevealed = splitWordsRevealed.join(" ");
-//   return splitWordsRevealed;
-// }
-
-// console.log(coveredLettersWords(getWord));
-// console.log(revealingLettersWords(getWord));
-
-// /* {
-//   const splitWordsCovered = splitWords();
-  
-  
-  
-// } */
-
-// // splitWords.splice(0, 1, "_");
-
-// const seeWords = document.querySelector("#currentWord");
-
-// seeWords.innerText = randomWordGenerator();
-
-// let guessLetter = document.querySelector("#guessLetter")
-// let showLetter = document.querySelector("#wrongLetter")
-// guessLetter.addEventListener("input", () => { // (guessLetter elr inputValue == randomWordGenerator.includes "maybe")
-//   let inputValue = guessLetter.value;
-//   showLetter.innerText = inputValue;
-// });
-
-// /*
-
-// function () {
-//   if (input == randomWordGenerator.includes) {
-//     True (reveal letter)
-//   } else {
-//     False (add svg path)
-//   }
-// }
-
-// */
-
-// /* if sats som gör en .includes() koll med nån loop från "Guess Letter". TRUE: .IndexOf() för det korrekt gissade blir replaced med ordinarie bokstav (med .splice() kanske), FALSE: returnar att du gissade fel och tar ett steg i listan/arrayen för SVG filen och emot failstate. */
-
-
-// // funktion som kollar words lista och guesses lista 
+// Ladda om sidan för att starta en ny omgång
+const newGameButton = document.getElementById("newGame");
+newGameButton.addEventListener("click", function () {
+  const resultPopup = document.getElementById("resultPopup");
+  resultPopup.style.display = "none";
+  location.reload(); 
+});
