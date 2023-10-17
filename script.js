@@ -1,5 +1,5 @@
 // Timer
-let time = 5 * 60; // 5 minuter, omvandlat till sekunder
+let time = 2 * 60 - 1; // 2 minuter, omvandlat till sekunder
 
 const timerButton = document.getElementById("StartTimerBtn"); // Hämta knappen för att starta timern från DOM
 const countdownEl = document.getElementById("countdown"); // Hämta elementet som visar nedräkningen från DOM
@@ -11,7 +11,7 @@ document.getElementById("inputBox").disabled = true;
 
 // Funktion för att starta timer
 function startTimer() {
-  CountdownInterval = setInterval(updateCountdown, 1000); // Starta en uppdateringsfunktion varje sekund
+  CountdownInterval = setInterval(updateCountdown, 100); // Starta en uppdateringsfunktion varje sekund
   timerButton.disabled = true; // Inaktivera startknappen när timern är igång
   document.getElementById("inputBox").disabled = false; // Aktivera input-fältet när timern startar
 }
@@ -197,10 +197,10 @@ function handleGameResult(gameResult) {
   resultPopup.style.display = "flex"; // Visa resultatpopupen
 
   if (gameResult) {
-    resultMessage.innerHTML = "<b>Du vann!</b>"; // Visa meddelande om vinst
+    resultMessage.innerHTML = "<b>Congratulations!<br> You won!</b>"; // Visa meddelande om vinst
     clearInterval(CountdownInterval); // Stoppa timerintervallet när spelet är över
   } else {
-    resultMessage.innerHTML = "<b>Du förlorade!</b><br>Rätt ord var: " + randomWord; // Visa meddelande om förlust och det rätta ordet
+    resultMessage.innerHTML = "<b>You lost!</b><br>The correct word was: " + randomWord; // Visa meddelande om förlust och det rätta ordet
     clearInterval(CountdownInterval); // Stoppa timerintervallet när spelet är över
   }
 
