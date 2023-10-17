@@ -11,7 +11,7 @@ document.getElementById("inputBox").disabled = true;
 
 // Funktion för att starta timer
 function startTimer() {
-  CountdownInterval = setInterval(updateCountdown, 100); // Starta en uppdateringsfunktion varje sekund
+  CountdownInterval = setInterval(updateCountdown, 1000); // Starta en uppdateringsfunktion varje sekund
   timerButton.disabled = true; // Inaktivera startknappen när timern är igång
   document.getElementById("inputBox").disabled = false; // Aktivera input-fältet när timern startar
 }
