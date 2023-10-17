@@ -71,7 +71,6 @@ body {
   display:none;
 }
 
-
 .wrongGuess {
   grid-column: 8 / 11;
   grid-row: 3 / 10;
@@ -101,7 +100,7 @@ span {
   align-items: center;
 }
 
-.timer {
+#timer {
   display: flex;
   justify-content: center;
   align-items: center;

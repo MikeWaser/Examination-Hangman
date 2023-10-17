@@ -1,5 +1,5 @@
 // Timer
-let time = 2 * 60 - 1; // 2 minuter, omvandlat till sekunder
+let time = 1 * 60 - 1; // 2 minuter, omvandlat till sekunder
 
 const timerButton = document.getElementById("StartTimerBtn");
 const countdownEl = document.getElementById("countdown");
