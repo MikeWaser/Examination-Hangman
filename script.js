@@ -209,7 +209,7 @@ function handleGameResult(gameResult) {
   resultPopup.style.display = "flex";
 
   if (gameResult) {
-    resultMessage.innerHTML = "<b>You won!</b>";
+    resultMessage.innerHTML = "<b>Congratulations!<br>You won!</b>";
     clearInterval(CountdownInterval);
   } else {
     resultMessage.innerHTML = "<b>You lost!</b><br>The correct word was " + randomWord;
