@@ -212,7 +212,7 @@ function handleGameResult(gameResult) {
     resultMessage.innerHTML = "<b>You won!</b>";
     clearInterval(CountdownInterval);
   } else {
-    resultMessage.innerHTML = "<b>You lost</b><br>The correct word was: " + randomWord;
+    resultMessage.innerHTML = "<b>You lost!</b><br>The correct word was: " + randomWord;
     clearInterval(CountdownInterval);
   }
 
