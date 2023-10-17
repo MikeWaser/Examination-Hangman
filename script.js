@@ -66,7 +66,7 @@ const words = [
 
 // Välj ett slumpmässigt ord från words listan
 const randomWord = words[Math.floor(Math.random() * words.length)];
-console.log(randomWord);
+/* console.log(randomWord); */
 
 // Splitta det slumpmässiga ordet till en array av bokstäver
 const splitWord = randomWord.split("");
@@ -152,7 +152,7 @@ userInputField.addEventListener("input", function () {
 // Tar reda på vilken bild som ska skrivas ut beroende på hur många fel man har
 function showPath(pathNumber) {
   const selectedPath = document.getElementById(`path${pathNumber}`);
-  console.log({selectedPath});
+  /* console.log({selectedPath}); */
   selectedPath.style.display = "block";
 }
 
@@ -209,10 +209,10 @@ function handleGameResult(gameResult) {
   resultPopup.style.display = "flex";
 
   if (gameResult) {
-    resultMessage.innerHTML = "<b>Du vann!</b>";
+    resultMessage.innerHTML = "<b>You won!</b>";
     clearInterval(CountdownInterval);
   } else {
-    resultMessage.innerHTML = "<b>Du förlorade!</b><br>Rätt ord var: " + randomWord;
+    resultMessage.innerHTML = "<b>You lost</b><br>The right word was: " + randomWord;
     clearInterval(CountdownInterval);
   }
 
