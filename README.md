@@ -1,5 +1,7 @@
 # Examination-Hangman
 
+# Hampus Falk, Mike Waser och Anton Hansen
+
 
 Krav på funktionalitet
 
