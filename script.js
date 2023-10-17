@@ -1,5 +1,5 @@
 // Timer
-let time = 2 * 60; // 5 minuter, omvandlat till sekunder
+let time = 2 * 60 - 1; // 2 minuter, omvandlat till sekunder
 
 const timerButton = document.getElementById("StartTimerBtn");
 const countdownEl = document.getElementById("countdown");
@@ -11,9 +11,9 @@ document.getElementById("inputBox").disabled = true;
 
 // Funktion för att starta timer
 function startTimer() {
-  CountdownInterval = setInterval(updateCountdown, 1000);
   timerButton.disabled = true;
   document.getElementById("inputBox").disabled = false;
+  CountdownInterval = setInterval(updateCountdown, 1000);
 }
 
 function updateCountdown() {
@@ -25,6 +25,7 @@ function updateCountdown() {
 
   // Uppdatera nedräkningen i DOM
   countdownEl.innerHTML = `${minutes}:${seconds}`;
+  console.log(time)
   time--;
 
   // Kontrollera om tiden har gått ut
@@ -66,7 +67,7 @@ const words = [
 
 // Välj ett slumpmässigt ord från words listan
 const randomWord = words[Math.floor(Math.random() * words.length)];
-/* console.log(randomWord); */
+console.log(randomWord);
 
 // Splitta det slumpmässiga ordet till en array av bokstäver
 const splitWord = randomWord.split("");
