@@ -1,26 +1,26 @@
 // Timer
 let time = 5 * 60; // 5 minuter, omvandlat till sekunder
 
-const timerButton = document.getElementById("StartTimerBtn");
-const countdownEl = document.getElementById("countdown");
+const timerButton = document.getElementById("StartTimerBtn"); // Hämta knappen för att starta timern från DOM
+const countdownEl = document.getElementById("countdown"); // Hämta elementet som visar nedräkningen från DOM
 
-let CountdownInterval;
+let CountdownInterval; // En variabel för att hålla koll på intervallet som uppdaterar nedräkningen
 
-// Stänger av useInput tills timern startar
+// Stänger av input-fältet tills timern startar
 document.getElementById("inputBox").disabled = true;
 
 // Funktion för att starta timer
 function startTimer() {
-  CountdownInterval = setInterval(updateCountdown, 1000);
-  timerButton.disabled = true;
-  document.getElementById("inputBox").disabled = false;
+  CountdownInterval = setInterval(updateCountdown, 1000); // Starta en uppdateringsfunktion varje sekund
+  timerButton.disabled = true; // Inaktivera startknappen när timern är igång
+  document.getElementById("inputBox").disabled = false; // Aktivera input-fältet när timern startar
 }
 
 function updateCountdown() {
-  const minutes = Math.floor(time / 60);
-  let seconds = time % 60;
+  const minutes = Math.floor(time / 60); // Beräkna minuter från kvarvarande sekunder
+  let seconds = time % 60; // Beräkna sekunder från kvarvarande sekunder
 
-// Lägger till en nolla innan sekunden när den är < 10
+  // Lägger till en nolla framför sekunder när de är mindre än 10
   seconds = seconds < 10 ? "0" + seconds : seconds;
 
   // Uppdatera nedräkningen i DOM
@@ -34,7 +34,7 @@ function updateCountdown() {
 // Funktion för att kontrollera om tiden har gått ut
 function checkTimeOut() {
   if (time === -1) {
-    clearInterval(CountdownInterval);
+    clearInterval(CountdownInterval); // Stoppa uppdateringsintervallet
 
     // Visa resultatet för förlust om tiden har gått ut
     handleGameResult(false);
@@ -82,9 +82,9 @@ const seeWords = document.querySelector("#currentWord");
 seeWords.innerText = joinSplitWord;
 
 // Hämta elementen från HTML
-const userInputField = document.querySelector(".userInput input");
-const currentWordElement = document.getElementById("currentWord");
-const wrongLetterElement = document.getElementById("wrongLetter");
+const userInputField = document.querySelector(".userInput input"); // Här hämtar vi input-fältet där spelaren gissar ordet
+const currentWordElement = document.getElementById("currentWord"); // Här hämtar vi elementet som visar det aktuella ordet
+const wrongLetterElement = document.getElementById("wrongLetter"); // Här hämtar vi elementet som visar felaktiga gissningar
 
 // Sparar spelarens gissningar
 const correctGuesses = []; // Array för korrekta gissningar
@@ -123,20 +123,25 @@ userInputField.addEventListener("input", function () {
   if (!wrongGuesses.includes(userInput)) {
     wrongGuesses.push(userInput);
     updateWrongLetterDisplay();
-    if (wrongGuesses.length === 1) {
-      showPath(1);
-    } else if (wrongGuesses.length === 2) {
-      showPath(2);
-    } else if (wrongGuesses.length === 3) {
-      showPath(3);
-    } else if (wrongGuesses.length === 4) {
-      showPath(4);
-    } else if (wrongGuesses.length === 5) {
-      showPath(5);
-    } else if (wrongGuesses.length >= 6) {
-      showPath(6);
 
-      // Visa resultatet för förlust om spealren har gjort för många felaktiga gissningar
+    //Gör samma sak som rad 131-147
+    //showPath(wrongGuesses.length);
+    //if (wrongGuesses.length >= 6) handleGameResult(false);
+
+    if (wrongGuesses.length === 1) {
+      showPath(1); // Visa första delen av "hangman" om spelaren gör ett fel
+    } else if (wrongGuesses.length === 2) {
+      showPath(2); // Visa andra delen av "hangman" om spelaren gör ytterligare ett fel
+    } else if (wrongGuesses.length === 3) {
+      showPath(3); // Visa tredje delen av "hangman" om spelaren gör ett tredje fel
+    } else if (wrongGuesses.length === 4) {
+      showPath(4); // Visa fjärde delen av "hangman" om spelaren gör ett fjärde fel
+    } else if (wrongGuesses.length === 5) {
+      showPath(5); // Visa femte delen av "hangman" om spelaren gör ett femte fel
+    } else if (wrongGuesses.length >= 6) {
+      showPath(6); // Visa sista delen av "hangman" om spelaren gör för många fel
+
+      // Visa resultatet för förlust om spelaren har gjort för många felaktiga gissningar
       handleGameResult(false);
     }
   }
@@ -170,42 +175,42 @@ function updateCurrentWordDisplay() {
 
   // Om spelaren har gissat hela ordet korrekt
   if (guess === actual) {
-    handleGameResult(true);
+    handleGameResult(true); // Visa resultatet för vinst om spelaren har gissat hela ordet korrekt
   }
 }
 
 // Funktion för att uppdatera visningen av felaktiga bokstäver
 function updateWrongLetterDisplay() {
-  wrongLetterElement.textContent = wrongGuesses.join(" ");
+  wrongLetterElement.textContent = wrongGuesses.join(" "); // Visa de felaktiga gissningarna
 }
 
 // Funktion för att visa resultatpopupen
 function handleGameResult(gameResult) {
   const input = document.querySelector("input");
   if (input) {
-    input.disabled = true;
+    input.disabled = true; // Inaktivera input-fältet när spelet är över
   }
-  const resultPopup = document.getElementById("resultPopup");
-  const resultMessage = document.getElementById("resultMessage");
-  const newGameButton = document.getElementById("newGame");
+  const resultPopup = document.getElementById("resultPopup"); // Hämta resultatpopupen från DOM
+  const resultMessage = document.getElementById("resultMessage"); // Hämta elementet som visar resultatmeddelandet från DOM
+  const newGameButton = document.getElementById("newGame"); // Hämta knappen för att starta ett nytt spel från DOM
 
-  resultPopup.style.display = "flex";
+  resultPopup.style.display = "flex"; // Visa resultatpopupen
 
   if (gameResult) {
-    resultMessage.textContent = "<b>Du vann!</b>";
-    clearInterval(CountdownInterval);
+    resultMessage.innerHTML = "<b>Du vann!</b>"; // Visa meddelande om vinst
+    clearInterval(CountdownInterval); // Stoppa timerintervallet när spelet är över
   } else {
-    resultMessage.innerHTML = "<b>Du förlorade!</b><br>Rätt ord var: " + randomWord;
-    clearInterval(CountdownInterval);
+    resultMessage.innerHTML = "<b>Du förlorade!</b><br>Rätt ord var: " + randomWord; // Visa meddelande om förlust och det rätta ordet
+    clearInterval(CountdownInterval); // Stoppa timerintervallet när spelet är över
   }
 
-  newGameButton.style.display = "block";
+  newGameButton.style.display = "block"; // Visa knappen för att starta ett nytt spel
 }
 
 // Ladda om sidan för att starta en ny omgång
-const newGameButton = document.getElementById("newGame");
+const newGameButton = document.getElementById("newGame"); // Hämta knappen för att starta ett nytt spel från DOM
 newGameButton.addEventListener("click", function () {
-  const resultPopup = document.getElementById("resultPopup");
-  resultPopup.style.display = "none";
-  location.reload(); 
+  const resultPopup = document.getElementById("resultPopup"); // Hämta resultatpopupen från DOM
+  resultPopup.style.display = "none"; // Dölj resultatpopupen
+  location.reload(); // Ladda om sidan för att starta ett nytt spel
 });
